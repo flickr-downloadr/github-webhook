@@ -1,0 +1,32 @@
+{
+  "name": "flickr-downloadr-webhook",
+  "version": "0.0.1",
+  "description": "A GitHub webhook that will merge the branch with the CI-built installers back into the master branch on flickr-downloadr.github.io",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flickr-downloadr/github-webhook.git"
+  },
+  "keywords": [
+    "webhook",
+    "flickr-downloadr",
+    "github",
+    "deployment"
+  ],
+  "author": "Floyd Pink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flickr-downloadr/github-webhook/issues"
+  },
+  "homepage": "https://github.com/flickr-downloadr/github-webhook",
+  "dependencies": {
+    "body-parser": "^1.2.0",
+    "debug": "^0.8.1",
+    "express": "^4.2.0",
+    "mongoose": "^3.8.9"
+  }
+}
