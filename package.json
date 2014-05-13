@@ -27,7 +27,15 @@
     "body-parser": "^1.2.0",
     "debug": "^0.8.1",
     "express": "^4.2.0",
+    "jssha": "^1.5.0",
     "mongoose": "^3.8.9",
     "morgan": "^1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "jshint-stylish": "^0.2.0",
+    "load-grunt-tasks": "^0.4.0",
+    "time-grunt": "^0.3.1"
   }
 }

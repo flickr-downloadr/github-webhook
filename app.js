@@ -1,14 +1,18 @@
+'use strict';
+
 var config = require('./config');
 if (config.env === 'development') {
-  process.env['DEBUG'] = 'fd:*';
+  process.env.DEBUG = 'fd:*';
 }
 
 var debug = require('debug')('fd:app'),
-    express = require('express'),
-    bodyParser = require('body-parser'),
-    morgan = require('morgan'),
-    mongoose = require('./mongoose'),
-    app = express();
+  express = require('express'),
+  bodyParser = require('body-parser'),
+  morgan = require('morgan'),
+  mongoose = require('./mongoose'),
+  app = express();
+
+GLOBAL.timers = [];
 
 if (config.env === 'development') {
   app.use(morgan({ format : 'dev', immediate : true }));
