@@ -4,6 +4,7 @@ var path = require('path'),
 
 var config = {
   development : {
+    env   : env,
     root  : rootPath,
     mongo : {},
     app   : {
@@ -13,6 +14,7 @@ var config = {
     db    : 'mongodb://localhost/flickr-downloadr-webhook-development'
   },
   test        : {
+    env   : env,
     root  : rootPath,
     mongo : {},
     app   : {
@@ -22,6 +24,7 @@ var config = {
     db    : 'mongodb://localhost/flickr-downloadr-webhook-test'
   },
   production  : {
+    env   : env,
     root  : rootPath,
     mongo : {},
     app   : {
