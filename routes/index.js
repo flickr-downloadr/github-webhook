@@ -3,10 +3,13 @@
 module.exports = function (app) {
 
   var debug = require('debug')('fd:routes'),
-    NOTIFYAFTER = 10000,
+    SECOND = 1000,
+    MINUTE = 60 * SECOND,
+    NOTIFICATION_TIMER = 30 * MINUTE,
     util = require('util'),
     JsSHA = require('jssha'),
     secret = process.env.FD_WEBHOOK_SECRET,
+    email = require('../email'),
     Commit = require('../models/commit'),
     validateRequestSignatue = function (signature, commitData) {
       debug('Inside validateRequestSignatue...');
@@ -33,22 +36,48 @@ module.exports = function (app) {
           wercker    : commitMessage.indexOf('(wercker)') > -1,
           created    : new Date(headCommit.timestamp)
         });
-        commit.save(function (err, commit) {
+        commit.save(function (err /*, commit */) {
           if (err) {
             var saveCommitError = util.format('Save commit Error: %s', err);
             debug(saveCommitError);
             res.send(500, saveCommitError);
           } else {
             debug('Commit saved successfully...');
-            debug(commit);
+            // debug(commit);
             if (commitData.before === '0000000000000000000000000000000000000000') {
               /* global timers */
               debug('Received the first commit for the branch');
               timers[branchName] = setTimeout(function () {
-                console.log('This is the time elapsed notification for the first commit on branch named %s', branchName);
-              }, NOTIFYAFTER);
+                debug('Timer has elapsed for the branch name %s and all the three commits haven\'t arrived yet.', branchName);
+                email.send();
+              }, NOTIFICATION_TIMER);
             } else {
               debug('The commit is not the first in this branch... No timer scheduled');
+              Commit.count({branchName : branchName}, function (err, count) {
+                if (err) {
+                  debug('Error in counting commits: %s', err);
+                } else {
+                  debug('Number of commits in the database is %d', count);
+                  if (count === 3) {
+
+                    clearTimeout(timers[branchName]);
+                    debug('Timer for %s has been cleared.');
+
+                    // TODO: Do the merge here
+
+                    Commit.remove({}, function (err) {
+                      if (err) {
+                        var removeAllCommitsError = util.format('Remove all commits error: %s', err);
+                        debug(removeAllCommitsError);
+                        res.send(500, removeAllCommitsError);
+                      } else {
+                        debug('Commits have been removed');
+                      }
+                    });
+
+                  }
+                }
+              });
             }
             res.send(200, 'Successfully processed the commit...');
           }
