@@ -1,10 +1,10 @@
 'use strict';
 
 var path = require('path'),
-  rootPath = path.normalize(__dirname + '/..'),
-  env = process.env.NODE_ENV || 'development',
-  user = process.env.MONGO_USER_NAME,
-  pass = process.env.MONGO_USER_PASS;
+    rootPath = path.normalize(__dirname + '/..'),
+    env = process.env.NODE_ENV || 'development',
+    user = process.env.MONGO_USER_NAME,
+    pass = process.env.MONGO_USER_PASS;
 
 var config = {
   development : {

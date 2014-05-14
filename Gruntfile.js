@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         src : 'Gruntfile.js'
       },
       lib       : {
-        src : ['app.js', 'config/**/*.js', 'models/**/*.js', 'mongoose/**/*.js', 'routes/**/*.js']
+        src : ['app.js', '**/*.js', '!node_modules/**/*.js']
       }
     }
   });
