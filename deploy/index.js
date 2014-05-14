@@ -25,7 +25,7 @@ exports.start = function (branchName) {
           debug('Error reading the branch file: %s', err);
           throw err;
         } else {
-          var currentBranch = data.slice(0, data.indexOf('\n') - 1);
+          var currentBranch = data.slice(0, data.indexOf('\n'));
           debug('currentBranch: \'%s\'', currentBranch);
           debug('branchName   : \'%s\'', branchName);
           if (currentBranch !== branchName) {
