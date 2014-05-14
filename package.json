@@ -1,45 +1,48 @@
 {
-  "name"            : "flickr-downloadr-webhook",
-  "version"         : "0.0.1",
-  "description"     : "A GitHub webhook that will merge the branch with the CI-built installers back into the master branch on flickr-downloadr.github.io",
-  "private"         : true,
-  "main"            : "app.js",
-  "scripts"         : {
-    "test" : "npm test"
+  "name": "flickr-downloadr-webhook",
+  "version": "0.0.1",
+  "description": "A GitHub webhook that will merge the branch with the CI-built installers back into the master branch on flickr-downloadr.github.io",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
   },
-  "repository"      : {
-    "type" : "git",
-    "url"  : "git://github.com/flickr-downloadr/github-webhook.git"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/flickr-downloadr/github-webhook.git"
   },
-  "keywords"        : [
+  "keywords": [
     "webhook",
     "flickr-downloadr",
     "github",
     "deployment"
   ],
-  "author"          : "Floyd Pink",
-  "license"         : "MIT",
-  "bugs"            : {
-    "url" : "https://github.com/flickr-downloadr/github-webhook/issues"
+  "author": "Floyd Pink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flickr-downloadr/github-webhook/issues"
   },
-  "homepage"        : "https://github.com/flickr-downloadr/github-webhook",
-  "dependencies"    : {
-    "body-parser" : "^1.2.0",
-    "debug"       : "^0.8.1",
-    "express"     : "^4.2.0",
-    "jssha"       : "^1.5.0",
-    "mongoose"    : "^3.8.9",
-    "morgan"      : "^1.0.1",
-    "nodemailer"  : "^0.6.4"
+  "homepage": "https://github.com/flickr-downloadr/github-webhook",
+  "dependencies": {
+    "body-parser": "^1.2.0",
+    "debug": "^0.8.1",
+    "express": "^4.2.0",
+    "gift": "^0.4.1",
+    "jssha": "^1.5.0",
+    "moment": "^2.6.0",
+    "mongoose": "^3.8.9",
+    "morgan": "^1.0.1",
+    "nodemailer": "^0.6.4",
+    "rimraf": "^2.2.8"
   },
-  "devDependencies" : {
-    "grunt"                : "^0.4.5",
-    "grunt-contrib-jshint" : "^0.10.0",
-    "jshint-stylish"       : "^0.2.0",
-    "load-grunt-tasks"     : "^0.4.0",
-    "time-grunt"           : "^0.3.1"
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "jshint-stylish": "^0.2.0",
+    "load-grunt-tasks": "^0.4.0",
+    "time-grunt": "^0.3.1"
   },
-  "engines"         : {
-    "node" : "0.10.x"
+  "engines": {
+    "node": "0.10.x"
   }
 }

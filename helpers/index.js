@@ -3,6 +3,8 @@
 var debug = require('debug')('fd:helpers'),
     util = require('util'),
     JsSHA = require('jssha'),
+    moment = require('moment'),
+    deploy = require('../deploy'),
     email = require('../email'),
     Commit = require('../models/commit'),
     secret = process.env.FD_WEBHOOK_SECRET,
@@ -42,9 +44,10 @@ var helpers = {
           clearTimeout(timers[branchName]);
           debug('Timer for %s has been cleared.', branchName);
 
-          // TODO: Do the merge here
+          debug('Beginning Deploy %s', moment().format());
+          deploy.start(branchName);
 
-          this.removeAllCommits();
+          helpers.removeAllCommits();
 
         }
       }
@@ -60,14 +63,14 @@ var helpers = {
         debug('Commit saved successfully...');
         // debug(commit);
         if (commitData.before === '0000000000000000000000000000000000000000') {
-          debug('Received the first commit for the branch');
+          debug('Received the first commit for the branch. Setting up the timer...');
           timers[branchName] = setTimeout(function () {
             debug('Timer has elapsed for the branch name %s and all the three commits haven\'t arrived yet.', branchName);
             email.send();
           }, NOTIFICATION_TIMER);
         } else {
           debug('The commit is not the first in this branch... No timer scheduled');
-          Commit.count({branchName : branchName}, this.countCommitClosure(branchName));
+          Commit.count({branchName : branchName}, helpers.countCommitClosure(branchName));
         }
         res.send(200, 'Successfully processed the commit...');
       }
