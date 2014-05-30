@@ -3,6 +3,7 @@
 exports.start = function (branchName) {
 
   var debug = require('debug')('fd:deploy'),
+      email = require('../email'),
       fs = require('fs'),
       git = require('gift'),
       util = require('util'),
@@ -56,6 +57,7 @@ exports.start = function (branchName) {
                                 throw err;
                               } else {
                                 debug('Deploy completed for branch \'%s\' at %s', branchName, moment().format());
+                                email.sendInfo(branchName);
                               }
                             });
                           }

@@ -66,7 +66,7 @@ var helpers = {
           debug('Received the first commit for the branch. Setting up the timer...');
           timers[branchName] = setTimeout(function () {
             debug('Timer has elapsed for the branch name %s and all the three commits haven\'t arrived yet.', branchName);
-            email.send();
+            email.sendAlert();
           }, NOTIFICATION_TIMER);
         } else {
           debug('The commit is not the first in this branch... No timer scheduled');
