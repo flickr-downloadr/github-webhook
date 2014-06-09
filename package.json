@@ -30,7 +30,7 @@
     "gift": "^0.4.2",
     "jssha": "^1.5.0",
     "moment": "^2.6.0",
-    "mongoose": "^3.8.12",
+    "mongoose": "3.8.12",
     "morgan": "^1.1.1",
     "nodemailer": "^0.6.5",
     "rimraf": "^2.2.8"
