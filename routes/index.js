@@ -7,7 +7,7 @@ module.exports = function (app) {
       helpers = require('../helpers');
 
   app.get('/', function (req, res) {
-    res.send('Welcome to the flickr-downloadr-webhook API !!!1');
+    res.status(200).send('Welcome to the flickr-downloadr-webhook API !!!1');
   });
 
   app.post('/', function (req, res) {
@@ -23,13 +23,13 @@ module.exports = function (app) {
       } else {
         var nonPushEvent = util.format('Event received (%s) is not \'push\'. We only process \'push\' events...', eventType);
         debug(nonPushEvent);
-        res.send(202, nonPushEvent);
+        res.status(202).send(nonPushEvent);
       }
     }
     else {
       var invalidSignature = 'Invalid request. Signature does not seem to be right...';
       debug(invalidSignature);
-      res.send(500, invalidSignature);
+      res.status(500).send(invalidSignature);
     }
   });
 

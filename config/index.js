@@ -5,7 +5,7 @@ var path = require('path'),
     env = process.env.NODE_ENV || 'development',
     user = process.env.MONGO_USER_NAME,
     pass = process.env.MONGO_USER_PASS,
-    mongodb_uri = process.env.MONGODB_URI;
+    mongodbUri = process.env.MONGODB_URI;
 
 var config = {
   development : {
@@ -28,7 +28,7 @@ var config = {
     port  : 1337,
     db    : 'mongodb://localhost/flickr-downloadr-webhook-test'
   },
-  old_production  : {
+  oldProduction  : {
     env   : env,
     root  : rootPath,
     mongo : {},
@@ -46,7 +46,7 @@ var config = {
       name : 'flickr-downloadr-webhook'
     },
     port  : process.env.PORT,
-    db    : mongodb_uri
+    db    : mongodbUri
   }
 };
 

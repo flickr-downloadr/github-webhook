@@ -6,19 +6,24 @@ if (config.env === 'development') {
 }
 
 var debug = require('debug')('fd:app'),
-    express = require('express'),
-    bodyParser = require('body-parser'),
-    morgan = require('morgan'),
-    mongoose = require('./mongoose'),
-    app = express();
+  express = require('express'),
+  bodyParser = require('body-parser'),
+  morgan = require('morgan'),
+  mongoose = require('./mongoose'),
+  app = express();
 
-GLOBAL.timers = [];
+global.timers = [];
 
 if (config.env === 'development') {
-  app.use(morgan({ format : 'dev', immediate : true }));
+  app.use(morgan('dev', {
+    immediate: true
+  }));
 }
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
 debug('Connecting to database connection...');
 var connection = mongoose.connect();
