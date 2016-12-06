@@ -35,7 +35,7 @@ var config = {
       name : 'flickr-downloadr-webhook'
     },
     port  : process.env.PORT,
-    db    : 'mongodb://' + user + ':' + pass + '@oceanic.mongohq.com:10043/app25185432'
+    db    : 'mongodb://' + user + ':' + pass + '@ds119748.mlab.com:19748/fd-webhook'
   }
 };
 
