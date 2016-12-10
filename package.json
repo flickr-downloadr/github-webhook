@@ -43,6 +43,6 @@
     "time-grunt": "^1.4.0"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "7.2.x"
   }
 }
