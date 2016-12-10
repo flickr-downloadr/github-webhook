@@ -16,12 +16,12 @@ global.timers = [];
 
 if (config.env === 'development') {
   app.use(morgan('dev', {
-    immediate: true
+    immediate : true
   }));
 }
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended : true
 }));
 app.use(bodyParser.json());
 
@@ -29,6 +29,11 @@ debug('Connecting to database connection...');
 var connection = mongoose.connect();
 
 var start = function () {
+  debug('Setting up git config..');
+  var childProcess = require('child_process');
+  childProcess.execSync('git config --global user.name "Flickr Downloadr Webhook"');
+  childProcess.execSync('git config --global user.email "contact.us@flickrdownloadr.com"');
+
   debug('Setting up routes..');
   require('./routes')(app);
 
