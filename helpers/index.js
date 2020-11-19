@@ -17,8 +17,12 @@ const helpers = {
     debug('Inside validateRequestSignature...');
     // debug('signature: %s', signature);
     // debug('commitData: %s', commitData);
-    const shaObj = new JsSHA(commitData, 'TEXT');
-    const hmac = shaObj.getHMAC(secret, 'TEXT', 'SHA-1', 'HEX');
+    const shaObj = new JsSHA('SHA-1', 'TEXT', {
+      hmacKey : {value : secret, format : 'TEXT'}
+    });
+    shaObj.update(commitData);
+    const hmac = shaObj.getHash('HEX');
+    // debug('hmac: %s', hmac);
     return 'sha1=' + hmac === signature;
   },
   removeAllCommits         : function (res) {
