@@ -1,13 +1,16 @@
 'use strict';
 
 exports.connect = function () {
-  const mongoose = require('mongoose'),
-    config = require('../config'),
-    options = {
-      user : config.mongo.user,
-      pass : config.mongo.pass
-    };
+  const mongoose = require('mongoose');
+  const config = require('../config');
 
-  mongoose.connect(config.db, options);
+  // reference: https://mongoosejs.com/docs/deprecations.html
+  mongoose.set('useNewUrlParser', true);
+  mongoose.set('useCreateIndex', true);
+  mongoose.set('useUnifiedTopology', true);
+
+  mongoose.connect(config.db);
+
   return mongoose.connection;
+
 };
