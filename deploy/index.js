@@ -2,15 +2,15 @@
 
 exports.start = function (branchName) {
 
-  var debug = require('debug')('fd:deploy'),
-      email = require('../email'),
-      fs = require('fs'),
-      git = require('gift'),
-      util = require('util'),
-      moment = require('moment'),
-      rimraf = require('rimraf'),
-      releasesRepo = util.format('https://%s:@github.com/flickr-downloadr/releases.git', process.env.FD_OAUTH_TOKEN),
-      cloneDir = util.format('/tmp/releasesRepo-%s', moment().format('YYYY-MM-DD-HH-mm-ss-SSS'));
+  const debug = require('debug')('fd:deploy'),
+    email = require('../email'),
+    fs = require('fs'),
+    git = require('gift'),
+    util = require('util'),
+    moment = require('moment'),
+    rimraf = require('rimraf'),
+    releasesRepo = util.format('https://%s:@github.com/flickr-downloadr/releases.git', process.env.FD_OAUTH_TOKEN),
+    cloneDir = util.format('/tmp/releasesRepo-%s', moment().format('YYYY-MM-DD-HH-mm-ss-SSS'));
 
   debug('About to clone the releases repo...');
 
@@ -20,13 +20,13 @@ exports.start = function (branchName) {
       throw err;
     } else {
       debug('Cloned release repo into %s', cloneDir);
-      var branchFile = util.format('%s/branch', cloneDir);
-      fs.readFile(branchFile, { encoding : 'utf8'}, function (err, data) {
+      const branchFile = util.format('%s/branch', cloneDir);
+      fs.readFile(branchFile, {encoding : 'utf8'}, function (err, data) {
         if (err) {
           debug('Error reading the branch file: %s', err);
           throw err;
         } else {
-          var currentBranch = data.slice(0, data.indexOf('\n'));
+          const currentBranch = data.slice(0, data.indexOf('\n'));
           debug('currentBranch: \'%s\'', currentBranch);
           debug('branchName   : \'%s\'', branchName);
           if (currentBranch !== branchName) {

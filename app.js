@@ -1,11 +1,11 @@
 'use strict';
 
-var config = require('./config');
+const config = require('./config');
 if (config.env === 'development') {
   process.env.DEBUG = 'fd:*';
 }
 
-var debug = require('debug')('fd:app'),
+const debug = require('debug')('fd:app'),
   express = require('express'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
@@ -26,11 +26,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 debug('Connecting to database connection...');
-var connection = mongoose.connect();
+const connection = mongoose.connect();
 
-var start = function () {
+const start = function () {
   debug('Setting up git config..');
-  var childProcess = require('child_process');
+  const childProcess = require('child_process');
   childProcess.execSync('git config --global user.name "Flickr Downloadr Webhook"');
   childProcess.execSync('git config --global user.email "contact.us@flickrdownloadr.com"');
 

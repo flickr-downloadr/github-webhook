@@ -1,30 +1,30 @@
 'use strict';
 
-var debug = require('debug')('fd:helpers'),
-    util = require('util'),
-    JsSHA = require('jssha'),
-    moment = require('moment'),
-    deploy = require('../deploy'),
-    email = require('../email'),
-    Commit = require('../models/commit'),
-    secret = process.env.FD_WEBHOOK_SECRET,
-    SECOND = 1000,
-    MINUTE = 60 * SECOND,
-    NOTIFICATION_TIMER = 30 * MINUTE;
+const debug = require('debug')('fd:helpers'),
+  util = require('util'),
+  JsSHA = require('jssha'),
+  moment = require('moment'),
+  deploy = require('../deploy'),
+  email = require('../email'),
+  Commit = require('../models/commit'),
+  secret = process.env.FD_WEBHOOK_SECRET,
+  SECOND = 1000,
+  MINUTE = 60 * SECOND,
+  NOTIFICATION_TIMER = 30 * MINUTE;
 
-var helpers = {
-  validateRequestSignatue : function (signature, commitData) {
-    debug('Inside validateRequestSignatue...');
+const helpers = {
+  validateRequestSignature : function (signature, commitData) {
+    debug('Inside validateRequestSignature...');
     // debug('signature: %s', signature);
     // debug('commitData: %s', commitData);
-    var shaObj = new JsSHA(commitData, 'TEXT');
-    var hmac = shaObj.getHMAC(secret, 'TEXT', 'SHA-1', 'HEX');
+    const shaObj = new JsSHA(commitData, 'TEXT');
+    const hmac = shaObj.getHMAC(secret, 'TEXT', 'SHA-1', 'HEX');
     return 'sha1=' + hmac === signature;
   },
-  removeAllCommits        : function (res) {
+  removeAllCommits         : function (res) {
     Commit.remove({}, function (err) {
       if (err) {
-        var removeAllCommitsError = util.format('Remove all commits error: %s', err);
+        const removeAllCommitsError = util.format('Remove all commits error: %s', err);
         debug(removeAllCommitsError);
         res.status(500).send(removeAllCommitsError);
       } else {
@@ -32,7 +32,7 @@ var helpers = {
       }
     });
   },
-  countCommitClosure      : function (branchName) {
+  countCommitClosure       : function (branchName) {
     return function (err, count) {
       /* global timers */
       if (err) {
@@ -53,10 +53,10 @@ var helpers = {
       }
     };
   },
-  saveCommitClosure       : function (res, commitData, branchName) {
+  saveCommitClosure        : function (res, commitData, branchName) {
     return function (err /*, commit */) {
       if (err) {
-        var saveCommitError = util.format('Save commit Error: %s', err);
+        const saveCommitError = util.format('Save commit Error: %s', err);
         debug(saveCommitError);
         res.status(500).send(saveCommitError);
       } else {
@@ -76,25 +76,25 @@ var helpers = {
       }
     };
   },
-  processCommit           : function (commitData, res) {
+  processCommit            : function (commitData, res) {
     /* jshint camelcase: false */
-    var branchRef = commitData.ref;
+    const branchRef = commitData.ref;
     if ((/^refs\/heads\/deploy-/).test(branchRef)) {
-      var branchName = branchRef.substr(11);
+      const branchName = branchRef.substr(11);
       debug('We\'re working with a deploy branch. Branch is : %s', branchName);
-      var headCommit = commitData.head_commit,
-          commitMessage = headCommit.message,
-          commit = new Commit({
-            commitId   : headCommit.id,
-            branchName : branchName,
-            appveyor   : commitMessage.indexOf('(appveyor)') > -1,
-            travis     : commitMessage.indexOf('(travis)') > -1,
-            wercker    : commitMessage.indexOf('(wercker)') > -1,
-            created    : new Date(headCommit.timestamp)
-          });
+      const headCommit = commitData.head_commit,
+        commitMessage = headCommit.message,
+        commit = new Commit({
+          commitId   : headCommit.id,
+          branchName : branchName,
+          appveyor   : commitMessage.indexOf('(appveyor)') > -1,
+          travis     : commitMessage.indexOf('(travis)') > -1,
+          wercker    : commitMessage.indexOf('(wercker)') > -1,
+          created    : new Date(headCommit.timestamp)
+        });
       commit.save(this.saveCommitClosure(res, commitData, branchName));
     } else {
-      var nonDeployBranch = util.format('The branch committed to is not a deploy branch. Ref is: %s', branchRef);
+      const nonDeployBranch = util.format('The branch committed to is not a deploy branch. Ref is: %s', branchRef);
       debug(nonDeployBranch);
       res.status(202).send(nonDeployBranch);
     }

@@ -1,14 +1,14 @@
 'use strict';
 
-var path = require('path'),
-    rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'development',
-    user = process.env.MONGO_USER_NAME,
-    pass = process.env.MONGO_USER_PASS,
-    mongodbUri = process.env.MONGODB_URI;
+const path = require('path'),
+  rootPath = path.normalize(__dirname + '/..'),
+  env = process.env.NODE_ENV || 'development',
+  user = process.env.MONGO_USER_NAME,
+  pass = process.env.MONGO_USER_PASS,
+  mongodbUri = process.env.MONGODB_URI;
 
-var config = {
-  development : {
+const config = {
+  development   : {
     env   : env,
     root  : rootPath,
     mongo : {},
@@ -18,7 +18,7 @@ var config = {
     port  : 1337,
     db    : 'mongodb://localhost/flickr-downloadr-webhook-development'
   },
-  test        : {
+  test          : {
     env   : env,
     root  : rootPath,
     mongo : {},
@@ -28,7 +28,7 @@ var config = {
     port  : 1337,
     db    : 'mongodb://localhost/flickr-downloadr-webhook-test'
   },
-  oldProduction  : {
+  oldProduction : {
     env   : env,
     root  : rootPath,
     mongo : {},
@@ -38,7 +38,7 @@ var config = {
     port  : process.env.PORT,
     db    : 'mongodb://' + user + ':' + pass + '@ds119748.mlab.com:19748/fd-webhook'
   },
-  production  : {
+  production    : {
     env   : env,
     root  : rootPath,
     mongo : {},
