@@ -1,7 +1,7 @@
 {
   "name": "flickr-downloadr-webhook",
   "version": "0.1.0",
-  "description": "A GitHub webhook that will merge the branch with the CI-built installers back into the master branch on flickr-downloadr.github.io",
+  "description": "A GitHub webhook that will merge the branch with the CI-built installers back into the main branch on flickr-downloadr.github.io",
   "private": true,
   "main": "app.js",
   "repository": {
