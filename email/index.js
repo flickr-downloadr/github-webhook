@@ -1,11 +1,30 @@
 'use strict';
 const email = (function () {
+  const {google} = require('googleapis');
+  const OAuth2 = google.auth.OAuth2;
+  const oAuth2Client = new OAuth2(
+    process.env.GMAIL_CLIENT_ID,
+    process.env.GMAIL_CLIENT_SECRET,
+    'https://developers.google.com/oauthplayground'
+  );
+  oAuth2Client.setCredentials({
+    refresh_token : process.env.GMAIL_REFRESH_TOKEN // jshint ignore:line
+  });
+  const accessToken = oAuth2Client.getAccessToken();
   const nodemailer = require('nodemailer'),
     smtpTransport = nodemailer.createTransport({
       service : 'Gmail',
       auth    : {
-        user : 'flickr.downloadr.webhook@gmail.com',
-        pass : process.env.FD_WEBHOOK_EMAIL_PASSWORD
+        type         : 'OAuth2',
+        user         : 'flickr.downloadr.webhook@gmail.com',
+        pass         : process.env.FD_WEBHOOK_EMAIL_PASSWORD,
+        clientId     : process.env.GMAIL_CLIENT_ID,
+        clientSecret : process.env.GMAIL_CLIENT_SECRET,
+        refreshToken : process.env.GMAIL_REFRESH_TOKEN,
+        accessToken  : accessToken
+      },
+      tls     : {
+        rejectUnauthorized : false
       }
     }),
     mailOptions = {
