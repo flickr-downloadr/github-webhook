@@ -92,7 +92,7 @@ const helpers = {
           commitId   : headCommit.id,
           branchName : branchName,
           appveyor   : commitMessage.indexOf('(appveyor)') > -1,
-          travis     : commitMessage.indexOf('(travis)') > -1,
+          github     : commitMessage.indexOf('(github)') > -1,
           wercker    : commitMessage.indexOf('(wercker)') > -1,
           created    : new Date(headCommit.timestamp)
         });
