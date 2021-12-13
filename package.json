@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/flickr-downloadr/github-webhook",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.19.1",
     "debug": "^4.3.2",
     "express": "^4.17.1",
     "gift": "^0.10.2",
