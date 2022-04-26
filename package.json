@@ -23,7 +23,7 @@
   "dependencies": {
     "body-parser": "^1.19.1",
     "debug": "^4.3.3",
-    "express": "^4.17.2",
+    "express": "^4.18.0",
     "gift": "^0.10.2",
     "googleapis": "^92.0.0",
     "jssha": "^3.2.0",
