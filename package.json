@@ -25,7 +25,7 @@
     "debug": "^4.3.3",
     "express": "^4.17.2",
     "gift": "^0.10.2",
-    "googleapis": "^92.0.0",
+    "googleapis": "^107.0.0",
     "jssha": "^3.2.0",
     "moment": "^2.29.1",
     "mongoose": "6.1.6",
